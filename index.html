@@ -8,6 +8,8 @@
 
     <style>html{background-color: #F0F0F0;}</style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
 
@@ -48,4 +50,17 @@
   <body>
     <div id="root"></div>
   </body>
+  <script type="text/javascript">
+    var l = window.location.pathname;
+    if(l.length >= 2) {
+      var user = l.slice(2);
+      if(user.length > 0) {
+        $.getJSON("https://api.carspotter.co/v1/user/" + user, function(data) {
+          var profile_picture_url = data.user.profile_picture_url;
+          $("#root").prepend('<img id="profile_banner" src="' + profile_picture_url + '" />');
+        });
+        
+      }
+    }
+  </script>
 </html>
